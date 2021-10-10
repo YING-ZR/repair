@@ -3,10 +3,11 @@ package Table_Struct
 type Repair_table struct {
 	Rnumber string
 	Rtime string
-	Rphenomenon string
-	Rfault string
-	Rproduct string
-	Rremarks string
+	Rphenomenon string//机器故障现象
+	Rfault string//故障类型
+	Rproduct string//选择产品类型
+	Rremarks string//备注
+	Rid string
 }
 //CREATE TABLE public.repair_table
 //(
