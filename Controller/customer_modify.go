@@ -7,6 +7,7 @@ import (
 	"repair/Table_Struct"
 )
 
+
 func Customer_modify(c *gin.Context){
 	db := Database.GetDB()
 	cname := c.PostForm("cname")

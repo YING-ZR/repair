@@ -1,5 +1,6 @@
 package Table_Struct
 
+//用户填写维修信息单表
 type Repair_table struct {
 	Rnumber string
 	Rtime string
@@ -8,6 +9,7 @@ type Repair_table struct {
 	Rproduct string//选择产品类型
 	Rremarks string//备注
 	Rid string
+	Rdistribution string//是否分配工程师
 }
 //CREATE TABLE public.repair_table
 //(

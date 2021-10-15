@@ -42,14 +42,17 @@ func Set_Table(c *gin.Context) {
 	}
     //自动生成订单号
     var number int
-	var table Table_Struct.Repair_table
-	db.Last(&table)
-	if len(table.Rnumber) == 0 {
-		number = 00000001
+	var table []Table_Struct.Repair_table
+	db.Find(&table)
+	if len(table) == 0 {
+		number = 1
 	}else{
-		number_,_ := strconv.Atoi(table.Rnumber)
+		number__ := util.DeleteTailBlank(table[len(table)-1].Rnumber)
+		number_,_ := strconv.Atoi(number__)
+		log.Println(strconv.Atoi(number__))
 		number = number_ + 1
 	}
+	log.Println(number)
 
 	//自动生成订单时间
 	//year := time.Now().Year()
@@ -72,6 +75,7 @@ func Set_Table(c *gin.Context) {
 		Rproduct : product,
 		Rremarks : remarks,
 		Rid : strconv.Itoa(ID),
+		Rdistribution : "否",
 	}
 	db.Create(&newtable)
 	//返回结果
@@ -84,6 +88,7 @@ func Set_Table(c *gin.Context) {
 func GetTable(c *gin.Context){
 	DB := Database.GetDB()
 	var table []Table_Struct.Repair_table
+	log.Println(table)
 	if err := DB.Find(&table).Error; err != nil{
 		c.JSON(200,gin.H{"error": err.Error()})
 	}else{
@@ -92,7 +97,7 @@ func GetTable(c *gin.Context){
 }
 
 //查询信息
-func Get_Table(c *gin.Context){
+func Select_Table(c *gin.Context){
 	db := Database.GetDB()
 	product := c.PostForm("product")
 	var table []Table_Struct.Repair_table

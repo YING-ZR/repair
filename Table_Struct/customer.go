@@ -1,5 +1,6 @@
 package Table_Struct
 
+//用户资料表
 type Customer struct {
 	Cname string
 	Ctelephone string
