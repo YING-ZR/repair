@@ -1,0 +1,35 @@
+<template>
+    <div class="mianbaoxie">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+  <el-breadcrumb-item v-for ="v in lists" :key="v.path">
+      <router-link :to="v.path">{{v.meta.title}}</router-link>
+
+      </el-breadcrumb-item>
+        </el-breadcrumb>
+    </div>
+</template>
+
+
+<script>
+
+export default{
+  data() {
+        return{
+ lists:[]
+        }
+    },
+    watch:{
+        $route(to,from){
+            // this.lists=to.matched;
+            this.lists=to.matched;
+        }
+    },
+    methods:{
+   
+},
+    mounted(){
+this.lists=this.$route.matched;
+    }
+   
+}
+</script>
