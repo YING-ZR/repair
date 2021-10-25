@@ -3,7 +3,7 @@ package Table_Struct
 //分配表
 type Distribution struct {
 	Dsparepart_name string //备件名称
-	Dtable_number string //维修单号
+	Dtable_number string //维修表单号
 	Dengineer_number string //技术工程师员工号
 	Dtime string //分配技术工程师时间
 	Dstatus string //维修状态

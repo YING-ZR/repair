@@ -10,6 +10,8 @@ type Repair_table struct {
 	Rremarks string//备注
 	Rid string
 	Rdistribution string//是否分配工程师
+	Predicttime string //预测完成时间
+	Predictprice string //预测价格
 }
 //CREATE TABLE public.repair_table
 //(

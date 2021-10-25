@@ -1,6 +1,7 @@
 package Controller
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -11,22 +12,29 @@ import (
 )
 
 func Staff_Login(c *gin.Context) {
-	db := Database.GetDB()
-	//获取参数
-	identity := c.PostForm("identity")
-	password := c.PostForm("password")
 	//db := Database.GetDB()
-	//b, _ := c.GetRawData()
-	//var m map[string]string
-	//_ = json.Unmarshal(b, &m)
-	//ID := m["Identity"]
-	//password := m["Password"]
+	//获取参数
+	//number := c.PostForm("number")
+	//identity := c.PostForm("identity")
+	//password := c.PostForm("password")
+	db := Database.GetDB()
+	b, _ := c.GetRawData()
+	var m map[string]string
+	_ = json.Unmarshal(b, &m)
+	identity := m["Identity"]
+	number := m["Number"]
+	password := m["Password"]
 
 	log.Printf("identity"+identity)
 	log.Printf("password"+password)
 	//判断身份进行登录
 	var staff Table_Struct.Staff
-	db.Where("IDENTITY =  ?", identity).Find(&staff)
+	db.Where("IDENTITY =  ? AND NUMBER = ?", identity, number).Find(&staff)
+	//判断ID号是否存在
+	if len(staff.Identity) == 0 {
+		c.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "该账户不存在"})
+		return
+	}
 	//判断密码是否正确
 	Spassword := util.DeleteTailBlank(staff.Password)
 	if Spassword != password {

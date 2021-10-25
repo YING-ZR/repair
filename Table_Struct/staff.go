@@ -4,6 +4,7 @@ package Table_Struct
 type Staff struct {
 	Identity string
 	Password string
+	Number string
 }
 
 //CREATE TABLE public.staff

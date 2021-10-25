@@ -37,18 +37,18 @@ func Customer_Login(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "密码不能少于6位"})
 		return
 	}
-	//判断手机号是否存在
+	//判断ID号是否存在
 	var user Table_Struct.Customer
 	db.Where("CID = ?", ID).First(&user)
 	if len(user.Cid) == 0 {
-		c.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "用户不存在"})
+		c.JSON(200, gin.H{"code": 200001, "msg": "用户不存在"})
 		return
 	}
 	//判断密码是否正确
 	Cpassword := util.DeleteTailBlank(user.Cpassword)
 	log.Println(len(Cpassword))
 	if Cpassword != password {
-		c.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "密码错误"})
+		c.JSON(200, gin.H{"code": 200002, "msg": "密码错误"})
 		return
 	}
 	//返回结果

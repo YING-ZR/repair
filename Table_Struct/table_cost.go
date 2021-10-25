@@ -2,11 +2,11 @@ package Table_Struct
 
 //维修费用单表
 type Table_Cost struct {
-	tcost string //总费用
+	Tcost string //总费用
 	Tnumber string //维修信息单单号
-	tsparepart_cost string //备件费
-	tengineer_cost string //人工费
-	tproblem_cost string //问题费用
+	Tsparepart_cost string //备件费
+	Tengineer_cost string //人工费
+	Tproblem_cost string //问题费用
 }
 //CREATE TABLE public.table_cost
 //(
